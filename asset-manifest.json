@@ -1,0 +1,22 @@
+{
+  "files": {
+    "main.css": "/arktamingcalculator/static/css/main.bf0f9df2.chunk.css",
+    "main.js": "/arktamingcalculator/static/js/main.c01c7d9e.chunk.js",
+    "main.js.map": "/arktamingcalculator/static/js/main.c01c7d9e.chunk.js.map",
+    "runtime-main.js": "/arktamingcalculator/static/js/runtime-main.a919f5ac.js",
+    "runtime-main.js.map": "/arktamingcalculator/static/js/runtime-main.a919f5ac.js.map",
+    "static/js/2.190446aa.chunk.js": "/arktamingcalculator/static/js/2.190446aa.chunk.js",
+    "static/js/2.190446aa.chunk.js.map": "/arktamingcalculator/static/js/2.190446aa.chunk.js.map",
+    "static/js/3.60ecc01c.chunk.js": "/arktamingcalculator/static/js/3.60ecc01c.chunk.js",
+    "static/js/3.60ecc01c.chunk.js.map": "/arktamingcalculator/static/js/3.60ecc01c.chunk.js.map",
+    "index.html": "/arktamingcalculator/index.html",
+    "static/css/main.bf0f9df2.chunk.css.map": "/arktamingcalculator/static/css/main.bf0f9df2.chunk.css.map",
+    "static/js/2.190446aa.chunk.js.LICENSE.txt": "/arktamingcalculator/static/js/2.190446aa.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.a919f5ac.js",
+    "static/js/2.190446aa.chunk.js",
+    "static/css/main.bf0f9df2.chunk.css",
+    "static/js/main.c01c7d9e.chunk.js"
+  ]
+}
