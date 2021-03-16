@@ -1,0 +1,41 @@
+{
+    "default": {
+        "IBM": 1,
+        "IdM": 1,
+        "IwM": 1,
+        "TaM": 1,
+        "TmM": 1
+    },
+    "official": {
+        "HEALTH": {
+            "IBM": 1,
+            "IdM": 0.2,
+            "IwM": 1,
+            "TaM": 0.14,
+            "TmM": 0.44
+        },
+        "MELEE_DMG": {
+            "IBM": 1,
+            "IdM": 0.17,
+            "IwM": 1,
+            "TaM": 0.14,
+            "TmM": 0.44
+        }
+    },
+    "singleplayer": {
+        "HEALTH": {
+            "IBM": 1,
+            "IdM": 0.425,
+            "IwM": 1,
+            "TaM": 0.5,
+            "TmM": 1
+        },
+        "MELEE_DMG": {
+            "IBM": 1,
+            "IdM": 0.4,
+            "IwM": 1,
+            "TaM": 0.5,
+            "TmM": 1
+        }
+    }
+}
