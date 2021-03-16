@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import health_logo from './icon/Health.png';
 import stamina_logo from './icon/Stamina.png';
 import oxygen_logo from './icon/Oxygen.png';
@@ -339,28 +339,6 @@ class DinoSelect extends React.Component {
       />
     );
   }
-}
-
-
-function DinasoLevelSlider() {
-  const [query, setQuery] = useState(this.props.dinoLevel);
-  const [displayMessage, setDisplayMessage] = useState("");
-
-  useEffect(() => {
-    const timeOutId = setTimeout(() => setDisplayMessage(query), 500);
-    return () => clearTimeout(timeOutId);
-  }, [query]);
-
-  return (
-    <>
-      <input
-        type="text"
-        value={query}
-        onChange={event => setQuery(event.target.value)}
-      />
-      <p>{displayMessage}</p>
-    </>
-  );
 }
 
 class DinoLevelSlider extends React.Component {
