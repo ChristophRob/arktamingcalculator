@@ -22,6 +22,9 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import green from '@material-ui/core/colors/green';
 import Slider from '@material-ui/core/Slider';
+import Typography from '@material-ui/core/Typography';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Box from '@material-ui/core/Box';
 
 function App() {
   const theme = React.useMemo(
@@ -43,7 +46,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Dino />
+      <Box className="mainContent">
+        <Dino />
+      </Box>
     </ThemeProvider>
   );
 }
@@ -119,6 +124,7 @@ class Dino extends React.Component {
       <>
         <DinoSettings {...this.state} changeDino={this.changeDino} changeDinoLevel={this.changeDinoLevel} changeTamingEffectiveness={this.changeTamingEffectiveness} changeImprintingBonus={this.changeImprintingBonus} changeSingleplayer={this.changeSingleplayer} />
         <StatForm {...this.state} changeWildLevel={this.changeWildLevel} />
+        {/* <TestStat /> */}
       </>
     );
   }
@@ -127,27 +133,27 @@ class Dino extends React.Component {
 class DinoSettings extends React.Component {
   render() {
     return (
-      <Grid container spacing={3}>
-        <Grid item xs={12} sm={6}>
+      <Grid container spacing={3} justify="center" alignItems="center" id="dinoSettings">
+        <Grid item xs={12} sm={6} >
           <DinoSelect value={this.props.species} changeDino={this.props.changeDino} />
         </Grid>
-        <Grid item xs={12} sm={6}>
+        <Grid item xs={12} sm={6} container justify="center">
           <FormControlLabel
             control={<Checkbox checked={this.props.singleplayer} onChange={this.props.changeSingleplayer} />}
             label="Singleplayer Settings"
           />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <NumberInput label={"Taming Effectivenes in % "} value={this.props.dino_te} changeNumber={this.props.changeTamingEffectiveness} pm={0.01} max_value={100} />
+          <SettingsInput label={"Taming Eff."} InputProps={{ endAdornment: <InputAdornment position="end">%</InputAdornment> }} value={this.props.dino_te} changeNumber={this.props.changeTamingEffectiveness} pm={0.01} max_value={100} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <NumberInput label={"Imprinting Bonus in % "} value={this.props.dino_ib} changeNumber={this.props.changeImprintingBonus} pm={0.01} max_value={100} />
+          <SettingsInput label={"Imprinting"} InputProps={{ endAdornment: <InputAdornment position="end">%</InputAdornment> }} value={this.props.dino_ib} changeNumber={this.props.changeImprintingBonus} pm={0.01} max_value={100} />
         </Grid>
         <Grid item xs={12} sm={6}>
           <DinoLevelSlider label={"Dino Level"} dinoLevel={this.props.dinoLevel} changeDinoLevel={this.props.changeDinoLevel} />
         </Grid>
         <Grid item xs={12} sm={6}>
-          <NumberInput label={"Dino Level"} value={this.props.dinoLevel} changeNumber={this.props.changeDinoLevel} pm={1} max_value={999} />
+          <SettingsInput label={"Dino Level"} value={this.props.dinoLevel} changeNumber={this.props.changeDinoLevel} pm={1} max_value={999} />
         </Grid>
       </Grid >
     );
@@ -292,10 +298,53 @@ class NumberInput extends React.Component {
     return (
       <Grid container spacing={2} alignItems="center">
         <Grid item>
-          {this.props.label}
-          <TextField className="statInput" label={this.props.label} name={this.props.name} type="number" variant="outlined" InputProps={{ inputProps: { max: this.props.max_value, min: 0 } }} value={this.props.value / this.props.pm} onChange={this.handleChange} />
+          <TextField fullWidth={true} className="statInput" label={this.props.label} name={this.props.name} type="number" variant="outlined" InputProps={{ inputProps: { max: this.props.max_value, min: 0 }, ...this.props.InputProps }} value={this.props.value / this.props.pm} onChange={this.handleChange} />
         </Grid>
         <Grid item>
+          <ButtonGroup
+            orientation="vertical"
+            aria-label="vertical contained primary button group"
+            color="secondary"
+            variant="contained"
+            size="small"
+          >
+            <Button name="increase" onClick={this.increaseValue}><AddIcon /></Button>
+            <Button name="decrease" onClick={this.decreaseValue}><RemoveIcon /></Button>
+          </ButtonGroup>
+        </Grid>
+      </Grid>
+    );
+  }
+}
+
+
+class SettingsInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.increaseValue = this.increaseValue.bind(this);
+    this.decreaseValue = this.decreaseValue.bind(this);
+  }
+
+  handleChange(event) {
+    this.props.changeNumber(event.target.value * this.props.pm);
+  }
+
+  increaseValue(event) {
+    this.props.changeNumber((this.props.value / this.props.pm + 1) * this.props.pm);
+  }
+
+  decreaseValue(event) {
+    this.props.changeNumber((this.props.value / this.props.pm - 1) * this.props.pm);
+  }
+
+  render() {
+    return (
+      <Grid container spacing={2} alignItems="center" justify="center">
+        <Grid item xs={5}>
+          <TextField fullWidth={true} className="statInput" label={this.props.label} name={this.props.name} type="number" variant="outlined" InputProps={{ inputProps: { max: this.props.max_value, min: 0 }, ...this.props.InputProps }} value={this.props.value / this.props.pm} onChange={this.handleChange} />
+        </Grid>
+        <Grid item xs={3}>
           <ButtonGroup
             orientation="vertical"
             aria-label="vertical contained primary button group"
@@ -360,17 +409,44 @@ class DinoLevelSlider extends React.Component {
 
   render() {
     return (
-      <Slider
-        value={this.props.dinoLevel}
-        onChange={this.sliderDinoLevel}
-        max={300}
-        min={1}
-        marks={this.marks}
-      />
+      <>
+        <Typography id="dino-level-slider" gutterBottom>
+          Dino Level
+        </Typography>
+        <Slider
+          value={this.props.dinoLevel}
+          onChange={this.sliderDinoLevel}
+          max={300}
+          min={1}
+          marks={this.marks}
+          aria-labelledby='dino-level-slider'
+        />
+      </>
     );
   }
 }
 
+
+class TestStat extends React.Component {
+  render() {
+    return (
+      <Grid container spacing={0} alignItems="center" justify="center">
+        <NocheinTest />
+        <NocheinTest />
+      </Grid>
+    );
+  }
+}
+
+class NocheinTest extends React.Component {
+  render() {
+    return (
+      <Grid item xs={12}>
+        Moin
+      </Grid>
+    );
+  }
+}
 
 export default App;
 

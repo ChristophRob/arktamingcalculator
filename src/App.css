@@ -1,13 +1,12 @@
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-#root {
+.mainContent {
   max-width: 800px;
   padding-top: 30px;
+  overflow-x: hidden;
+}
+
+.paddingLeftRight {
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .statLabel {
